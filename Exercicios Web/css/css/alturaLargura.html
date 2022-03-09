@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Altura e Largura</title>
+    <style>
+        html{
+            height: 100%;
+        }
+        
+        body {
+            font-size: 40px;
+            background-color: coral;
+            height: 100%;
+            margin: 0;
+        }
+
+        div {
+            background-color: seagreen;
+        }
+
+        span {
+            background-color: dodgerblue;
+        }
+
+        /* Quando se usa medidas relativas no caso "%" não fez efeito
+        pois é a porcentagem de acordo com o elemento a que o item pertence
+        no caso o body. Como o body é pequeno nesse exemplo não teve alteração
+        */
+
+        /* O body vai crescendo em tamanho de acordo com o que tem nele de elementos,
+        porém, ele já ocupa em largura 100%
+        */
+
+        /* Para a "%" funcionar na div tive que dizer que o body é 100% e criar
+        um elemento html também com 100% (100% da viewport)
+        */
+
+        /* Lembrete: altura e largura são desconsiderados inline */
+        span, div {
+            width: 50%;
+            height: 250px;
+            height: 50%;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Título</div>
+    <span>Subtítulo</span>
+    <p>Teste    </p>
+</body>
+
+</html>

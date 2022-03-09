@@ -1,0 +1,74 @@
+<!-- Source permite que você coloque vários formatos de vídeo e ele só irá da erro após testar todos -->
+<!-- Controls permite que apareça na tela uma interface do vídeo -->
+<video id="meuVideo" width="800" height="450" controls controlsList="nodownload">
+    <source src="http://files.cod3r.com.br/curso-web/video.mp4" type="video/mp4">
+    Seu browser não suporta a tag de vídeo.
+</video>
+
+<div wm-progresso="meuVideo" class="progresso">
+    <div></div>
+</div>
+
+<div>
+    <button wm-play="meuVideo">Play</button>
+    <button wm-pause="meuVideo">Pause</button>
+</div>
+
+<style>
+    .progresso {
+        height: 20px;
+        width: 500px;
+        border: solid 1px #444;
+        margin: 20px;
+    }
+
+    .progresso > div {
+        background-color: red;
+        color: #fff;
+        height: 100%;
+        text-align: right;
+        font-size: 14px;
+        width: 0%;
+    }
+</style>
+
+<!-- Meu código -->
+<!-- <script>
+    
+    const video = document.querySelector('video')
+    const playButton = document.querySelector('[wm-play]')
+    const pauseButton = document.querySelector('[wm-pause]')
+    
+    playButton.onclick = (e) => {
+        video.play()
+    }
+
+    pauseButton.onclick = (e) => {
+        video.pause()
+    }
+    
+</script> -->
+
+<script>
+    function configurarVideo(id){
+        //Pegando o video 
+        const video = document.getElementById(id)
+        //tirando o menu de contexto do vídeo
+        video.oncontextmenu = () => false
+
+        //Atribuindo eventos aos botões
+        document.querySelector(`[wm-play=${id}]`).onclick = () => video.play()
+        document.querySelector(`[wm-pause=${id}]`).onclick = () => video.pause()
+    
+        //Implementando a barra de progresso
+        setInterval(()=>{
+            const percentual = (video.currentTime / video.duration) * 100
+            const valorDiv = document.querySelector(`[wm-progresso=${id}] > div`)
+
+            valorDiv.style.width = `${percentual}%`
+            valorDiv.innerHTML = `${percentual.toFixed(1)} %`
+        },500)
+
+    } 
+    configurarVideo('meuVideo')
+</script>

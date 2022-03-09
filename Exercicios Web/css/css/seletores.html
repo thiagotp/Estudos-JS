@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Selectors</title>
+    <link rel="stylesheet" href="css/tag.css">
+    <style>
+        /* seletor universal */
+        * {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* seletor de classe */
+        .tag {
+            background-color: #f77;
+        }
+
+        /* seletor de id */
+        #aprovados {
+            background-color: #f77;
+        }
+
+        /* Elemento diretamente dentro de outro */
+        #aninhado>div {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Qualquer descendente de um elemento */
+        #aninhado section {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Seletor de irmãos adjacentes (um logo em seguida do outro) */
+        p+ul {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Seletor de irmãos (mesmo pai) */
+        p~ol {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Propriedade */
+        [feira] {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        [feira = casa] {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Quando se tem mais de um atributo ele procura todos que tenham a palavra casa */
+        [feira ~= casa] {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Procura qualquer elemento que contenha o que está escrito */
+        [feira *= sa] {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Tag filha (nesse exemplo o primeiro filho) */
+        /* Quando o primeiro filho de alguém é do tipo span */
+        span:nth-child(1){
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Filhos impares */
+        /* Dentro da section quero todos os filhos impares */
+        section > :nth-child(odd){
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Filhos pares */
+        /* Dentro da section quero todos os filhos pares */
+        section > :nth-child(even){
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Filhos especificos */
+        /* Dentro da section quero o tipo "tal" */
+        section > span:nth-of-type(2){
+            color: #ff0;
+            background-color: #f77;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='tag'>
+        <div class='tag'>
+            <p class='tag'>1</p>
+            <ul class='tag' feira='casa'>
+                <li>Arroz</li>
+                <li>Feijão</li>
+            </ul>
+            <ul class='tag' feira='escritorio empresa'>
+                <li>Café</li>
+                <li>Água</li>
+            </ul>
+            <ol id='aprovados' class='tag'>
+                <li>Maria</li>
+                <li>Pedro</li>
+                <li>Ana</li>
+            </ol>
+            <div id='aninhado' class='tag'>
+                <div class="tag">
+                    <section class='tag'>
+                        <span class='tag'>1</span>
+                        <p class='tag'>2</p>
+                        <span class='tag'>3</span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/tag.js"></script>
+</body>
+
+</html>

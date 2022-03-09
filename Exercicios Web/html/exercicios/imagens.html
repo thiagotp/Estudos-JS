@@ -1,0 +1,120 @@
+<div wm-slider>
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg"
+         alt="Muro da Cidade" 
+         width="513" 
+         height="342"
+         title="Muro da Cidade por Tarso Bessa">
+    </p>
+    
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem2.gif"
+         alt="Intro Cod3r" 
+         height="342">
+    </p>
+    
+    <p class="circular">
+        <img src="http://files.cod3r.com.br/curso-web/imagem3.png" 
+        alt="Rio de Janeiro"
+        height="342">
+    </p>
+    
+    <p class="texto">
+        <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" 
+        alt="Avatar"
+        height="50"
+        align="left">
+        Texto feiahfueahfiafhaiefheaifhaeu ifueha
+        feuhfiuah ifuheaifhu iufheaih feiahfueahfiafhaiefheaifha
+        feiahfueahfiafhaiefheaifhaeu ifueha
+        feuhfiuah ifuheaifhu iufheaih feiahfueahfiafhaiefheaifha
+        feiahfueahfiafhaiefheaifhaeu ifueha
+        feuhfiuah ifuheaifhu iufheaih feiahfueahfiafhaiefheaifha
+        feiahfueahfiafhaiefheaifhaeu ifueha
+        feuhfiuah ifuheaifhu iufheaih feiahfueahfiafhaiefheaifha
+    </p>
+    
+    
+    <p class="cidade">
+    
+    </p>
+    
+    <p>
+        <picture>
+            <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png"
+            media="(min-width: 600px)">
+            <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" alt="Logo">
+        </picture>
+    </p>    
+</div>
+
+<style>
+    p{
+        position: absolute;
+        display: none;
+    }
+    .circular {
+        width: 513px;
+        background-color: #444;
+    }
+    
+    .texto{
+        width: 500px;
+    }
+
+    .texto img {
+        margin-right: 10px;
+    }
+
+    .cidade{
+        width: 513px;
+        height: 342px;
+        background-image: url('http://files.cod3r.com.br/curso-web/imagem4.jpg');
+        position: center;
+        background-repeat: no-repeat;
+        background-size: 200%;
+    }
+</style>
+
+<script>
+    function mover(elem, inicio, fim, passo, callback){
+        //Irá fazer com que a imagem se mova pelos pixels da página
+        const novoInicio = inicio - passo
+        //Verificando se o caminho já foi todo percorrido
+        if(novoInicio >= fim){
+            //Setando a propriedade css que irá ser alterada para que a imagem se movimente
+            elem.style.left = novoInicio + 'px'
+            //O setTimeout irá chamar a função mover para que a imagem esteja sempre se movimentando
+            setTimeout(() => mover(elem, novoInicio, fim, passo, callback), 7)
+        } else {
+            callback()
+        }
+    }
+
+    function slider(){
+        const elementos = document.querySelectorAll('[wm-slider] > p')
+        //Como o querySelectorAll retorna um NodeList iremos transformar ele em um array
+        const slides = Array.from(elementos)
+        exibirSlide(slides, slides[0])
+    }
+
+    function exibirSlide(slides, slide){
+        slide.style.display = 'block'
+        //pegando o tamanho da tela
+        const inicio = innerWidth
+        //pegando o tamanho da imagem e trocando o sinal
+        const fim = -slide.clientWidth
+        slide.style.left = `${inicio}px`
+        mover(slide, inicio, fim, 5, () => {
+            slide.style.display = 'none'
+            exibirSlide(slides, getProximoSlide(slides, slide))
+        })
+    }
+
+    function getProximoSlide(lista, atual){
+        const i = lista.indexOf(atual) + 1
+        return i < lista.length ? lista[i] : lista[0]
+    }
+
+    slider()
+</script>
