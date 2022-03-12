@@ -22,6 +22,52 @@
             border: solid 5px dodgerblue;
             background: #fff;
         }
+
+        body {
+            display: grid;
+            /* Define o espaco que cada coluna ira ocupar no template */
+            grid-template-columns: 50% 50%;
+            grid-template-columns: repeat(4, 8.33%);
+            grid-template-columns: repeat(12, 8.33%);
+            /* Adicionando mais um elemento apos o repeat */
+            grid-template-columns: repeat(11, 100px) 100px;
+            /* 1 - fixo
+               2 - percentual
+               3 - 1 fragmento(o que sobrou) */
+            grid-template-columns: 200px 20% 1fr;
+            /* Dividindo a tela em fragmentos */
+            grid-template-columns: 3fr 6fr 3fr;
+            /* Aplicando agora para as linhas */
+            grid-template-rows: 50% 25% 12.5% 12.5%;
+            /* As linhas que nao foram configuradas irao dividir o espaco que sobrar */
+            grid-template-rows: 100px 1fr;
+            /* As linhas nao configuradas irao dividir igualmente o espaco que sobrar */
+            grid-template-rows: 100px auto;
+        }
+
+        .d8 {
+            grid-column-start: 2;
+            grid-column-end: 4;
+            grid-column-end: span 2;
+            grid-row-start: 3;
+            grid-row-end: 5;
+            grid-row-end: span 2;
+        }
+
+        .d10,
+        .d11 {
+            /* Cuidado pois pode haver sobreposicao */
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 5;
+            grid-row-end: span 1;
+        }
+
+        /* prioridade de profundidade */
+        .d10 {
+            z-index: 10;
+        }
+
     </style>
 </head>
 
