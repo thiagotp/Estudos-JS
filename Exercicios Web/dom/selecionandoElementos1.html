@@ -10,7 +10,23 @@
     <div>Segundo</div>
     <div class="terceiro ultimo">.terceiro .ultimo</div>
     <script>              
-        // ...
+        // Formas de selecionar elementos
+        // Localizando elemento pelo ID
+        document.getElementById('primeiro').classList.add('destaque')
+
+        // Localizando elemento pela TAG
+        const divs = document.getElementsByTagName('div')
+        // transformando HTML.Collection em array
+        Array.from(divs).forEach(e => e.classList.remove('destaque'))
+        const divsArray = [...divs]
+        divsArray.forEach(e => e.classList.add('destaque'))
+
+        // Localizando elemento pela classe
+        const ultimosElementos = document.getElementsByClassName('ultimo')
+        // O HTML Colletion suporta o for
+        for(let e of ultimosElementos){
+            e.classList.remove('destaque')
+        }
     </script>
 </body>
 </html>
