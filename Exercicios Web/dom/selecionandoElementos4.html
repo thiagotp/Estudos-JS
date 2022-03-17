@@ -22,7 +22,46 @@
         <p>Fim</p>
     </div>
     <script>
-        // ...
+        function log(){
+            console.log(this)
+        }
+
+        // inserindo a funcao log no prototype
+        HTMLCollection.prototype.log = log
+        HTMLElement.prototype.log = log
+        NodeList.prototype.log = log
+        Node.prototype.log = log
+
+        const lista = document.querySelector('div ul')
+        // pegando o elemento pai
+        lista.parentNode.log()
+        // pegando os elementos filhos
+        // o childNode lhe retorna um espacos/texto... junto com o elemento que voce deseja
+        lista.childNodes.log()
+
+        // pegando apenas o primeiro filho de um elemento
+        const primeiro = lista.firstChild
+        primeiro.log()
+        // pegando o proximo elemento a partir da referencia
+        primeiro.nextSibling.log()
+
+        // pegando ultimo elemento
+        const ultimo = lista.lastChild
+        ultimo.log()
+        // pegando o elemento anterior ao da referencia
+        ultimo.previousSibling.log()
+
+        // pegando os elementos filhos sem espacos/textos....
+        lista.children.log()
+        lista.firstElementChild.log()
+        lista.lastElementChild.log()
+        // pegando o parente anterior da lista
+        lista.parentNode.previousElementSibling.log()
+        // pegando o proximo parente da lista
+        lista.parentNode.nextElementSibling.log()
+
+        document.querySelectorAll('div ul li').log()
+
     </script>
 </body>
 
