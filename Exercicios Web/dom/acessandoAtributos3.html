@@ -16,7 +16,13 @@
         </ul>
     </div>
     <script>
-        // ...
+        // Acessando os atributos personalizados direto com .
+        // apenas leitura, sem alteração
+        const lista = document.querySelector('div ul[destino="escritório"]')
+        console.log(lista.attributes)
+        console.log(lista.attributes[0])
+        console.log(lista.attributes.destino)
+        console.log(lista.attributes['data-urgencia'])
     </script>
 </body>
 
