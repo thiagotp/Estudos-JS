@@ -1,7 +1,7 @@
 function novoElemento(tagName, className) {
-    const element = document.createElement(tagName)
-    element.className = className
-    return element
+    const elemento = document.createElement(tagName)
+    elemento.className = className
+    return elemento
 }
 
 // funcao construtora da barreira
@@ -59,14 +59,13 @@ function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
             if (par.getX() < -par.getLargura()) {
                 par.setX(par.getX() + espaco * this.pares.length)
                 par.sortearAbertura()
-                console.log(par.getX())
             }
 
             const meio = largura / 2
             const cruzouOMeio = par.getX() + deslocamento >= meio &&
                 par.getX() < meio
             if (cruzouOMeio) notificarPonto()
-                // cruzouOMeio && notificarPonto()
+            // cruzouOMeio && notificarPonto()
         })
     }
 
@@ -80,27 +79,30 @@ function Passaro(alturaDoJogo) {
 
     const tela = document.querySelector('body')
 
-    tela.addEventListener('keydown', (e) => {
-        const key = e.code
-        console.log(key)
-        if (key === 'Space') {
-            voando = true
-        } else {
-            voando = false
-        }
-    })
+    // tela.addEventListener('keydown', (e) => {
+    //     const key = e.code
+    //     console.log(key)
+    //     if (key === 'Space') {
+    //         voando = true
+    //     } else {
+    //         voando = false
+    //     }
+    // })
 
-    tela.addEventListener('keyup', (e) => {
-        const key = e.code
-        if (key === 'Space') {
-            voando = false
-        } else {
-            voando = true
-        }
-    })
+    // tela.addEventListener('keyup', (e) => {
+    //     const key = e.code
+    //     if (key === 'Space') {
+    //         voando = false
+    //     } else {
+    //         voando = true
+    //     }
+    // })
 
     this.getY = () => parseInt(this.elemento.style.bottom.split('px')[0])
     this.setY = y => this.elemento.style.bottom = `${y}px`
+
+    window.onkeydown = e => voando = true
+    window.onkeyup = e => voando = false
 
     this.animar = () => {
         const novoY = this.getY() + (voando ? 8 : -3)
@@ -125,6 +127,33 @@ function Progresso() {
     this.atualizarPontos(0)
 }
 
+function estaoSobrepostos(elementoA, elementoB) {
+    // pegando o retangulo respectivo de cada elemento
+    const primeiroElemento = elementoA.getBoundingClientRect()
+    const segundoElemento = elementoB.getBoundingClientRect()
+
+    const horizontal = primeiroElemento.left + primeiroElemento.width >= segundoElemento.left
+        && segundoElemento.left + segundoElemento.width >= primeiroElemento.left
+
+    const vertical = primeiroElemento.top + primeiroElemento.height >= segundoElemento.top
+        && segundoElemento.top + segundoElemento.height >= primeiroElemento.top
+
+    return horizontal && vertical    
+}
+
+function colisao(passaro, barreiras) {
+    let colidiu = false
+    barreiras.pares.forEach(parDeBarreiras => {
+        if(!colidiu){
+            const superior = parDeBarreiras.superior.elemento
+            const inferior = parDeBarreiras.inferior.elemento
+            colidiu = estaoSobrepostos(passaro.elemento, superior) ||
+            estaoSobrepostos(passaro.elemento, inferior)
+        }
+    })
+    return colidiu
+}
+
 function flappyBird() {
     let pontos = 0
 
@@ -145,6 +174,10 @@ function flappyBird() {
         const temporizador = setInterval(() => {
             barreiras.animar()
             passaro.animar()
+
+            if(colisao(passaro, barreiras)){
+                clearInterval(temporizador)
+            }
         }, 20)
     }
 }
