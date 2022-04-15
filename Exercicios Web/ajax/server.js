@@ -34,6 +34,14 @@ app.post('/upload', (req, res) => {
     })
 })
 
+app.post('/formulario', (req, res) => {
+    // criando um objeto a partir da resposta do body e adicionando um ID
+    res.send({
+        ...req.body,
+        id:1
+    })
+})
+
 // Dando start no servidor
 app.listen(8080, () => console.log('Executando ....'))
 
