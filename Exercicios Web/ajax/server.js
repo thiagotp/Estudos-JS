@@ -38,7 +38,18 @@ app.post('/formulario', (req, res) => {
     // criando um objeto a partir da resposta do body e adicionando um ID
     res.send({
         ...req.body,
-        id:1
+        id:1993
+    })
+})
+
+app.get('/parOuImpar', (req, res) => {
+    // formas no express de receber dados para o front-end
+    // req.body
+    // req.query (.../parOuImpar?numero=2)
+    // req.params (/parOuImpar/2)
+    const par = parseInt(req.query.numero) % 2 === 0
+    res.send({
+        resultado: par ? 'par' : 'impar'
     })
 })
 
