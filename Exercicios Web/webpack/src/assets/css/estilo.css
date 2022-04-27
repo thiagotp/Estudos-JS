@@ -1,3 +1,7 @@
 body {
     background-color: #494;
+    background-image: url(../imgs/chevrolet-2021-onix-premier-8389-e1607978189472.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
 }
