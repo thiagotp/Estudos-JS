@@ -22,7 +22,44 @@
 <body class='conteudo exercicio'>
     <h1>Manipulando Atributos</h1>
     <div wm-relogio='1000'></div>
+    <div wm-relogio='3000'></div>
     <script>
-        // ...
+        function Relogio(elemento) {
+            const horaCerta = $('<p>')
+            const botaoMenos = $('<button>').html('-')
+            const botaoMais = $('<button>').html('+')
+
+            // transformando elemento da DOM em elemento jQuery
+            const $elemento = $(elemento)
+            $elemento.append(horaCerta, botaoMenos, botaoMais)
+
+            // pegando o valor de um atributo
+            const getIntervaloAtual = () => parseInt($elemento.attr('wm-relogio'))
+
+            let temporizador = null
+            const iniciar = () => {
+                if (temporizador) clearInterval(temporizador)
+                temporizador = setInterval(() => {
+                    horaCerta.html(new Date().toLocaleString('pt-BR'))
+                }, getIntervaloAtual())
+            }
+
+            const alterarIntervalo = delta => {
+                const novo = Math.max(getIntervaloAtual() + delta, 1000)
+                $elemento.attr('wm-relogio', novo)
+                iniciar()
+            }
+
+            botaoMenos.click(e => alterarIntervalo(1000))
+            botaoMais.click(e => alterarIntervalo(-1000))
+            iniciar()
+        }
+
+        $('[wm-relogio]').each((index, elemento) => new Relogio(elemento))
+
+
+        $('[wm-relogio]').attr({ novo: true , teste: 1 })
+        $('[wm-relogio]').removeAttr('teste')
+
     </script>
 </body>
