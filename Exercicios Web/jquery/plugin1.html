@@ -22,6 +22,30 @@
     </div>
 
     <script>
-        // ...
+        (function ($) {
+            $.fn.interpretar = function () {
+                const retirarChaves = s => s.substring(2, s.length - 2)
+                const conteudo = $(this).html()
+                console.log(conteudo)
+                const expressoesComChaves = conteudo.match(/\{\{.+\}\}/g)
+                console.log(expressoesComChaves)
+                const expressoes = expressoesComChaves.map(retirarChaves)
+                console.log(expressoes)
+                const resultados = expressoes.map(e => eval(e))
+                console.log(resultados)
+                
+                let conteudoFinal = conteudo
+                for (let i = 0; i < expressoesComChaves.length; i++) {
+                    conteudoFinal = conteudoFinal.replace(
+                        expressoesComChaves[i], resultados[i]
+                        )
+                }
+                $(this).html(conteudoFinal)
+                console.log(this)
+                return this
+            }
+        })(jQuery)
+
+        $('div').interpretar()
     </script>
 </body>
