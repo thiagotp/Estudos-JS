@@ -1,0 +1,7 @@
+// O "~" serve para dizer que ele vai procurar dentro de node_modules o que foi referenciado
+@import "~bootstrap/scss/bootstrap";
+
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
+@import "custom";
