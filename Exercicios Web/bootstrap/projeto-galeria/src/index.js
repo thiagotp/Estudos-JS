@@ -8,3 +8,4 @@ import 'bootstrap'
 // Meu arquivos JS
 
 import './js/core/includes.js'
+import './js/plugins/cityButtons.js'
