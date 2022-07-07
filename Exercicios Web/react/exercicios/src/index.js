@@ -8,9 +8,17 @@ import { BoaTarde, BoaNoite } from './components/Multiplos'
 import Multi from './components/Multiplos'
 
 import Saudacao from './components/Saudacao'
+import Pai from './components/Pai'
+import Filho from './components/Filho'
 
 ReactDOM.render(
     <div>
-        <Saudacao tipo="Bom dia" nome="Joao" />
+        <Pai nome="Paulo" sobrenome="Silva">
+            {/* Como passo os componentes Filhos aqui */}
+            <Filho nome="Pedro" ></Filho>
+            <Filho nome="Paulo" ></Filho>
+            <Filho nome="Carla" ></Filho>
+        </Pai>
+
     </div>
-, document.getElementById('root'))
+    , document.getElementById('root'))
